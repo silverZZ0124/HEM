@@ -34,6 +34,10 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+<<<<<<< HEAD
 
 #config
 /config
+=======
+config
+>>>>>>> origin/master
