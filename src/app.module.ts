@@ -6,8 +6,7 @@ import { OrderModule } from './order/order.module';
 import { MenuModule } from './menu/menu.module';
 import {TypeOrmModule} from '@nestjs/typeorm'
 import { ReservationModule } from './reservation/reservation.module';
-import { AuthController } from './auth/auth.controller';
-import { AuthService } from './auth/auth.service';
+
 
 @Module({
   imports: [
@@ -16,8 +15,6 @@ import { AuthService } from './auth/auth.service';
     MenuModule ,
     MemberModule, VisitedModule, ReservationModule
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
 })
 export class AppModule {}
-//
+
