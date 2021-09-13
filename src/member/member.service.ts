@@ -5,6 +5,7 @@ import { MemberCredentialsDto } from './dto/member-credential.dto';
 import { MemberSignInDto } from './dto/member-signIn.dto';
 import { MemberRepository } from './member.repository';
 import * as bcrypt from 'bcryptjs';
+import { Member } from './member.entity';
 
 @Injectable()
 export class MemberService {
@@ -31,5 +32,9 @@ export class MemberService {
         }  else {
             throw new UnauthorizedException('로그인 정보가 일치하지 않습니다.')
         }
+    }
+
+    async getAllMember():Promise <Member[]> {
+        return this.memberRepository.find();
     }
 }
