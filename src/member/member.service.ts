@@ -62,6 +62,7 @@ export class MemberService {
     }
 
     //회원정보수정
+    //자신의 정보만 수정하도록
     async updateMember(memberNo, memberUpdateDto : MemberUpdateDto):Promise<Member> {
         const member = await this.getMemberByNo(memberNo);
 

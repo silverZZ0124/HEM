@@ -20,7 +20,7 @@ export class MemberController {
     signIn(@Body(ValidationPipe) memberSignInDto : MemberSignInDto): Promise<{accessToken: string}>  {
         return this.memberService.signIn(memberSignInDto);
     }
-    
+
     @Get('/list')
     getAllMember(): Promise<Member[]> {
         return this.memberService.getAllMember();
@@ -39,7 +39,8 @@ export class MemberController {
     @Patch('/:no/update')
     updateMember(
         @Param('no', ParseIntPipe) no:number,
-        @Body(ValidationPipe) memberUpdateDto : MemberUpdateDto): Promise<Member> {
+        @Body(ValidationPipe) memberUpdateDto : MemberUpdateDto,
+        @GetUser() user:User): Promise<Member> {
             return this.memberService.updateMember(no,memberUpdateDto);
         }
 }
