@@ -5,7 +5,7 @@ import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, Unique } from "type
 export class Member extends BaseEntity {
     
     @PrimaryGeneratedColumn()
-    memberNumber : number;
+    memberNo : number;
 
     @Column()
     memberName : string;
