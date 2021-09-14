@@ -1,32 +1,32 @@
 import { Menu } from "src/menu/menu.entity";
 import { Order } from "src/order/order.entity";
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity,OneToMany } from "typeorm";
+import { Unique, BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany } from "typeorm";
 
 @Entity()
+@Unique(['memberId'])
 export class Member extends BaseEntity {
-    
+
     @PrimaryGeneratedColumn()
-    memberNumber : number;
+    memberNumber: number;
 
     @Column()
-    memberName : string;
+    memberName: string;
 
     @Column()
-    memberAddress : string;
+    memberAddress: string;
 
     @Column()
-    memberPhone : string;
+    memberPhone: string;
 
     @Column()
-    memberId : string;
+    memberId: string;
 
     @Column()
-    memberPw : string;
+    memberPw: string;
 
     @OneToMany(() => Menu, menu => menu.member)
     menus: Menu[];
 
     @OneToMany(() => Order, order => order.member)
     orders: Order[];
-
 }
