@@ -7,7 +7,7 @@ import { Unique, BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany }
 export class Member extends BaseEntity {
 
     @PrimaryGeneratedColumn()
-    memberNumber: number;
+    memberNo: number;
 
     @Column()
     memberName: string;
@@ -29,4 +29,5 @@ export class Member extends BaseEntity {
 
     @OneToMany(() => Order, order => order.member)
     orders: Order[];
+
 }
