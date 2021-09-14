@@ -1,17 +1,21 @@
+import { Member } from "src/member/member.entity";
 import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity()
 export class Menu extends BaseEntity{
     @PrimaryGeneratedColumn()
-    menu_number:number;
+    menuNumber:number;
 
     @Column()
-    menu_name:string;
+    menuName:string;
 
     @Column()
-    menu_price:number;
+    menuPrice:number;
     
     @Column()
-    menu_status:string;
+    menuStatus:string;
+
+    @ManyToOne(() => Member, member => member.menus)
+    member: Member;
 
 }

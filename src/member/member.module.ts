@@ -10,11 +10,11 @@ import * as config from 'config';
 
 const jwtConfig = config.get('jwt');
 @Module({
-  imports:[
-    PassportModule.register({defaultStrategy:'jwt'}),
+  imports: [
+    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: process.env.JWT_SECRET || jwtConfig.secret,
-      signOptions :{
+      signOptions: {
         expiresIn: jwtConfig.expiresIn //토큰 유효시간 : 1시간
       }
     }),
@@ -22,6 +22,6 @@ const jwtConfig = config.get('jwt');
   ],
   controllers: [MemberController],
   providers: [MemberService, JwtStrategy],
-  exports: [JwtStrategy, PassportModule ]
+  exports: [JwtStrategy, PassportModule]
 })
-export class MemberModule {}
+export class MemberModule { }
