@@ -15,7 +15,7 @@ export class Menu extends BaseEntity{
     @Column()
     menuStatus:string;
 
-    @ManyToOne(() => Member, member => member.menus)
+    @ManyToOne(() => Member, member => member.menus,{cascade:true})
     member: Member;
 
 }
