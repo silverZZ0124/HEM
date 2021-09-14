@@ -4,7 +4,7 @@ import { MemberSignInDto } from './dto/member-signIn.dto';
 import { MemberUpdateDto } from './dto/member-update.dto'
 import { MemberService } from './member.service';
 import { Member } from './member.entity';
-
+//import { GetMember } from './get-member.decorator';
 @Controller('member')
 export class MemberController {
     constructor(
@@ -40,7 +40,7 @@ export class MemberController {
     updateMember(
         @Param('no', ParseIntPipe) no:number,
         @Body(ValidationPipe) memberUpdateDto : MemberUpdateDto,
-        @GetUser() user:User): Promise<Member> {
+        ): Promise<Member> {
             return this.memberService.updateMember(no,memberUpdateDto);
         }
 }
