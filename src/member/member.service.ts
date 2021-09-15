@@ -45,25 +45,28 @@ export class MemberService {
         });
     }
 
-    //회원 삭제
-    async deleteMember(memberNo:number) : Promise<void> {
-        const result = await this.memberRepository.delete(memberNo);
+    //회원 삭제(자신의 정보만)
+    async deleteMember(member:Member) : Promise<void> {
+        const result = await this.memberRepository.delete(member.memberNo);
     }
 
     //회원 단일 조회
-    async getMemberByNo(memberNo:number) : Promise<Member>{
-        const found = await this.memberRepository.findOne(memberNo);
+    //자신의 정보만 가져오게
+    async getMemberByNo(member:Member) : Promise<Member>{
+        const result = this.memberRepository
+                            .createQueryBuilder('member')
+                            .where('member.memberNo = :memberNo', {memberNo:member.memberNo})
+                            .getOne();
 
-        if(!found) {
-            throw new NotFoundException(`회원 정보를 찾을 수 없습니다.`)
-        }
-
-        return found;
+        return result;
+        
     }
 
     //회원정보수정
-    async updateMember(memberNo, memberUpdateDto : MemberUpdateDto):Promise<Member> {
-        const member = await this.getMemberByNo(memberNo);
+    //자신의 정보만 수정하도록
+    async updateMember(memberUpdateDto : MemberUpdateDto, member:Member):Promise<Member> {
+        console.log(member);
+        const myInfo = await this.getMemberByNo(member);
 
         const {             
             memberPw, 
@@ -72,14 +75,14 @@ export class MemberService {
             memberPhone } = memberUpdateDto;
 
         
-        member.memberPw = memberPw;
-        member.memberName = memberName;
-        member.memberAddress = memberAddress;
-        member.memberPhone = memberPhone;
+        myInfo.memberPw = memberPw;
+        myInfo.memberName = memberName;
+        myInfo.memberAddress = memberAddress;
+        myInfo.memberPhone = memberPhone;
 
-        await this.memberRepository.save(member);
+        await this.memberRepository.save(myInfo);
 
-        return member;
+        return myInfo;
         
     }
 }
