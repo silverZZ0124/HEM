@@ -15,23 +15,24 @@ export class MenuService {
         const menu = this.menuRepository.create({
             menuName,
             menuPrice,
-            member
+            member,
+            menuStatus:"판매중"
         })
 
         await this.menuRepository.save(menu)
         return menu;
     }
 
-    async getMenuList(memberNumber : number):Promise<Menu[]>{
+    async getMenuList(memberNo : number):Promise<Menu[]>{
         return await this.menuRepository.find({member:{
-            memberNumber
+            memberNo
         }})
     }
 
-    async getMenu(memberNumber : number, menuNumber:number ):Promise<Menu>{
+    async getMenu(memberNo : number, menuNumber:number ):Promise<Menu>{
         return await this.menuRepository.findOne({
             member:{
-                memberNumber
+                memberNo
             },
             menuNumber
         })
@@ -44,8 +45,8 @@ export class MenuService {
         }
     }
 
-    async deleteMenu(memberNumber : number, menuNumber:number){
-        const result = await this.menuRepository.delete({member:{memberNumber},menuNumber})
+    async deleteMenu(memberNo : number, menuNumber:number){
+        const result = await this.menuRepository.delete({member:{memberNo},menuNumber})
         if(result.affected === 0){
             throw new NotFoundException(`Can't find Menu`)
         }
