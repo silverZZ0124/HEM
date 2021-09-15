@@ -1,10 +1,12 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Req, UseGuards, ValidationPipe } from '@nestjs/common';
 import { MemberCredentialsDto } from './dto/member-credential.dto';
 import { MemberSignInDto } from './dto/member-signIn.dto';
 import { MemberUpdateDto } from './dto/member-update.dto'
 import { MemberService } from './member.service';
 import { Member } from './member.entity';
-//import { GetMember } from './get-member.decorator';
+import { GetMember } from './get-member.decorator';
+import { AuthGuard } from '@nestjs/passport';
+
 @Controller('member')
 export class MemberController {
     constructor(
@@ -26,21 +28,30 @@ export class MemberController {
         return this.memberService.getAllMember();
     }
 
-    @Delete('/:no')
-    deleteMember(@Param('no', ParseIntPipe) no:number): Promise<void> {
-        return this.memberService.deleteMember(no);
+    @Delete('/delete')
+    @UseGuards(AuthGuard()) 
+    deleteMember(@GetMember() member:Member): Promise<void> {
+        return this.memberService.deleteMember(member);
     }
 
-    @Get('/:no') 
-    getMemberByNo(@Param('no') no:number):Promise<Member> {
-        return this.memberService.getMemberByNo(no);
+    @Get('/myinfo')
+    @UseGuards(AuthGuard()) 
+    getMemberByNo(@GetMember() member:Member):Promise<Member> {
+        //console.log(member);
+        return this.memberService.getMemberByNo(member);
     }
 
-    @Patch('/:no/update')
+    @Patch('/update')
+    @UseGuards(AuthGuard()) 
     updateMember(
-        @Param('no', ParseIntPipe) no:number,
         @Body(ValidationPipe) memberUpdateDto : MemberUpdateDto,
-        ): Promise<Member> {
-            return this.memberService.updateMember(no,memberUpdateDto);
+        @GetMember() member:Member): Promise<Member> {
+            return this.memberService.updateMember(memberUpdateDto,member);
         }
+
+    // @Post('/test')
+    // @UseGuards(AuthGuard()) 
+    // test(@GetMember() member:Member) {
+    //     console.log(member);
+    // } 
 }
