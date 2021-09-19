@@ -15,5 +15,8 @@ export class Visited extends BaseEntity {
     @Column()
     visitedAddress : string;
 
+    @Column({ type: 'timestamptz', nullable: false })
+    visitedTime : Date;
+
 
 }
