@@ -5,7 +5,7 @@ import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGe
 @Entity()
 export class Order extends BaseEntity{
     @PrimaryGeneratedColumn()
-    orderId:number;
+    orderNumber:number;
 
     @Column()
     orderTableNumber:string;
@@ -18,5 +18,5 @@ export class Order extends BaseEntity{
 
     @ManyToMany(() => Menu)
     @JoinTable()
-    Menus: Menu[];
+    menus: Menu[];
 }
