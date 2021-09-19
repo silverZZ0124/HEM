@@ -1,5 +1,6 @@
 import { Menu } from "src/menu/menu.entity";
 import { Order } from "src/order/order.entity";
+import { Reservation } from "src/reservation/reservation.entity";
 import { Unique, BaseEntity, PrimaryGeneratedColumn, Column, Entity, OneToMany } from "typeorm";
 
 @Entity()
@@ -29,5 +30,8 @@ export class Member extends BaseEntity {
 
     @OneToMany(() => Order, order => order.member)
     orders: Order[];
+
+    @OneToMany(() => Reservation, reservation => reservation.member)
+    reservations: Reservation[];
 
 }
