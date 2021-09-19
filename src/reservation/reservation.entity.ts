@@ -1,4 +1,5 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from "typeorm";
+import { Member } from "src/member/member.entity";
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity, ManyToOne } from "typeorm";
 
 @Entity()
 export class Reservation extends BaseEntity {
@@ -21,5 +22,7 @@ export class Reservation extends BaseEntity {
     @Column()
     reservationPeople : number;
 
+    @ManyToOne(() => Member, member => member.reservations)
+    member:Member;
 
 }
