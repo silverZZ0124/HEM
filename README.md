@@ -13,6 +13,7 @@
 
 
 ## ERD 설계
+<img width="879" alt="스크린샷 2021-09-30 오후 3 08 38" src="https://user-images.githubusercontent.com/72031018/135396832-7c06f1ae-ea1c-4254-b153-ece4fa91c989.png">
 
 
 
@@ -25,7 +26,6 @@
 - 예약 CRUD
 - 주문 CRUD
 - 방문기록 C
-
 
 
 
